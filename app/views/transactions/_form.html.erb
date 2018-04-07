@@ -11,28 +11,41 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.date_select :date, id: :transaction_date %>
+  <div class="form-group row">
+    <%= form.label :date, class: "col-2 col-form-label" %>
+    <div class="col-10">
+      <%#= form.date_select :date, id: :transaction_date, class: "form-control" %>
+      <% if form.object.date %>
+        <%= form.text_field :date, id: :record_date, class: "form-control", type: "date", value: form.object.date %>
+      <% else %>
+        <%= form.text_field :date, id: :record_date, class: "form-control", type: "date", value: Date.parse(Time.now.in_time_zone('Pacific Time (US & Canada)').to_s) %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :transaction_description %>
+  <div class="form-group row">
+    <%= form.label :description, class: "col-2 col-form-label" %>
+    <div class="col-10">
+      <%= form.text_field :description, id: :transaction_description, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price, id: :transaction_price %>
+  <div class="form-group row">
+    <%= form.label :price, class: "col-2 col-form-label" %>
+    <div class="col-10">
+      <%= form.number_field :price, id: :transaction_price, class: "form-control", step: 0.01, min: 0.01 %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :category %>
-    <%= form.select :category_id, options_for_select(Category.all.map{|c|[c.title, c.id]}) %>
+  <div class="form-group row">
+    <%= form.label :category, class: "col-2 col-form-label" %>
+    <div class="col-10">
+      <%= form.select :category_id, options_for_select(Category.all.map{|c|[c.title, c.id]}), class: "form-control" %>
+    </div>
     <%# <%= form.text_field :category, id: :transaction_category %1> %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group row">
+    <%= form.submit "Create Transaction", class: "btn btn-primary" %>
   </div>
 <% end %>
