@@ -51,4 +51,8 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Added config
+  config.time_zone = 'Eastern Time (US & Canada)'
+  config.active_record.default_timezone = :local
 end
