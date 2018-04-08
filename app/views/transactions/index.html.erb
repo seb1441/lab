@@ -20,7 +20,7 @@
         <td><%= transaction.description %></td>
         <td><%= transaction.price %></td>
         <td><%= transaction.category.title %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction), class: "btn btn-primary btn-sm" %> <%= link_to 'Delete', transaction, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %></td>
+        <td><%= link_to 'Edit', edit_transaction_path(transaction), class: "btn btn-dark btn-sm" %> <%= link_to 'Delete', transaction, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Transaction', new_transaction_path, class: "btn btn-dark" %>
+<%= link_to 'New Transaction', new_transaction_path, class: "btn btn-primary" %>
