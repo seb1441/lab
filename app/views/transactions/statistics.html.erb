@@ -24,6 +24,12 @@
         <% end %>
       </tr>
     <% end %>
+    <tr>
+      <th scope ="row">Total</th>
+      <% @totals.each do |total| %>
+        <td>$<%= total %></td>
+      <% end %>
+    </tr>
   </tbody>
 </table>
-Total spent: $<%= @total_spent %>
+Total spent: 

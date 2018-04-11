@@ -93,7 +93,14 @@ class TransactionsController < ApplicationController
 
       @categories.push obj
     end
-    @total_spent = transactions.sum(:price)
+    @totals = []
+
+    @totals.push transactions.sum(:price)
+
+    users.each do |user|
+      @totals.push transactions.where(user: user).sum(:price)
+    end
+
     # @users.each do |u|
     #   # instance_variable_set("@#{u.username)}".to_sym)
     #     instance_variable_set("@#{u.username.downcase}_spent", @transactions.where(user: u).sum(:price))
