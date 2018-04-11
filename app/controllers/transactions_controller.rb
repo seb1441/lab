@@ -5,21 +5,25 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
+    @page_title = "Transactions"
     @transactions = Transaction.order(date: :desc)
   end
 
   # GET /transactions/1
   # GET /transactions/1.json
   def show
+    @page_title = "Transaction"
   end
 
   # GET /transactions/new
   def new
+    @page_title = "New Transaction"
     @transaction = Transaction.new
   end
 
   # GET /transactions/1/edit
   def edit
+    @page_title = "Edit Transaction"
   end
 
   # POST /transactions
@@ -62,6 +66,40 @@ class TransactionsController < ApplicationController
       format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def statistics
+    @page_title = "Statistics"
+    # transactions by params[:month]
+    transactions = Transaction.all
+    users = User.all
+
+    @categories = []
+
+    Category.all.each do |category|
+      obj = {
+        color: category.color,
+        category: category.title,
+        total: transactions.where(category: category).sum(:price),
+        users: {}
+      }
+      # obj_users = {}
+
+      users.each do |user|
+        obj[:users][user.username.to_sym] = transactions.where(user: user, category: category).sum(:price)
+      end
+
+      # obj[:users] 
+
+      @categories.push obj
+    end
+    @total_spent = transactions.sum(:price)
+    # @users.each do |u|
+    #   # instance_variable_set("@#{u.username)}".to_sym)
+    #     instance_variable_set("@#{u.username.downcase}_spent", @transactions.where(user: u).sum(:price))
+    # end
+    # @yuki_spent = Transaction.where(user: User.find_by(us)).sum(:price)
+    # @seb_spent = Transaction.all.sum(:price)
   end
 
   private
