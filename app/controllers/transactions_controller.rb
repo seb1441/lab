@@ -73,7 +73,7 @@ class TransactionsController < ApplicationController
 
     @categories = []
 
-    Category.all.each do |category|
+    Category.order('title ASC').each do |category|
       obj = {
         color: category.color,
         category: category.title,
