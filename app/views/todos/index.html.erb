@@ -1,0 +1,44 @@
+<h1>To-dos</h1>
+
+<table class="table table-sm table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Assignee</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todos.each do |todo| %>
+      <tr>
+        <td><%= todo.title %></td>
+        <td><%= todo.description %></td>
+        <td><%= todo.user.username %></td>
+        <td class="dropdown">
+          <button style="width:130px;" class="btn bg-white dropdown-toggle text-success" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= todo.status.to_s.humanize %>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <% todo.buttons.each do |button| %>
+              <!-- <a class="dropdown-item <%#= button[0] %>" href="<%#= button[1] %>"><%#= button[2] %></a> -->
+              <!-- <a class="dropdown-item <%#= button[0] %>" href="<%#= button[1] %>" data-method="post" rel="nofollow"><%#= button[2] %></a> -->
+              <%= link_to button[2], button[1] + "#{todo.id}", method: :post, class: "dropdown-item " + button[0] %>
+              <%#= dropdown_button_item(*button, todo) %>
+            <% end %>
+          </div>
+        </td>
+        <!-- <td><%#= todo.status.to_s.humanize %></td> -->
+        <!-- <td><%#= link_to 'Edit', edit_todo_path(todo) %></td> -->
+        <!-- <td><%#= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+        <!-- <td><%#= link_to 'Done', todo_done_path(todo), method: :post %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Todo', new_todo_path, class: 'btn btn-primary' %>
