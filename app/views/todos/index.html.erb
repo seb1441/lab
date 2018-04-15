@@ -18,7 +18,7 @@
         <td><%= todo.description %></td>
         <td><%= todo.user.username %></td>
         <td class="dropdown">
-          <button style="width:130px;" class="btn bg-white dropdown-toggle text-success" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button style="width:130px;" class="btn bg-white dropdown-toggle <%= todo.status_color %>" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= todo.status.to_s.humanize %>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

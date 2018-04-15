@@ -11,6 +11,12 @@ class Todo < ApplicationRecord
     buttons
   end
 
+  def status_color
+    return "text-danger" if pending?
+    return "text-warning" if in_progress?
+    return "text-success" if done?
+  end
+
   def self.humanized_statuses
     hash = statuses.hash
     # hash[] = hash.delete :old_key
