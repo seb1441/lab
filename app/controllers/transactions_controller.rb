@@ -5,7 +5,6 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @page_title = "Transactions"
     @transactions = Transaction.order(date: :desc)
   end
 
@@ -17,13 +16,11 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    @page_title = "New Transaction"
     @transaction = Transaction.new
   end
 
   # GET /transactions/1/edit
   def edit
-    @page_title = "Edit Transaction"
   end
 
   # POST /transactions
@@ -89,7 +86,7 @@ class TransactionsController < ApplicationController
         obj[:users][user.username.to_sym] = transactions.where(user: user, category: category).sum(:price)
       end
 
-      # obj[:users] 
+      # obj[:users]
 
       @categories.push obj
     end

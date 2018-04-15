@@ -16,7 +16,7 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <th scope="row" class="bg-success"><%= transaction.id %></th>
+        <th scope="row"><%= transaction.id %></th>
         <td><%= transaction.date %></td>
         <td><%= transaction.user.username %></td>
         <td><%= transaction.description %></td>
