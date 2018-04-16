@@ -11,22 +11,30 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :todo_title %>
+  <div class="form-group row">
+    <%= form.label :title, class: "col-2 col-form-label" %>
+    <div class="col-10">
+      <%= form.text_field :title, id: :todo_title, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :todo_description %>
+  <div class="form-group row">
+    <%= form.label :description, class: "col-2 col-form-label" %>
+    <div class="col-10">
+      <%= form.text_area :description, id: :todo_description, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.select :user_id, options_for_select(User.all.map{|u|[u.username, u.id]}) %>
+  <div class="form-group row">
+    <%= form.label :user_id, class: "col-2 col-form-label" %>
+    <div class="col-10">
+      <%= form.select :user_id, options_for_select(User.all.map{|u|[u.username, u.id]}), class: "form-control" %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group row">
+    <%#= form.submit, "Create/Update To-do", class: "btn btn-primary" %>
+    <%= form.submit "Create To-do", class: "btn btn-primary" if action_name == "new" %>
+    <%= form.submit "Update To-do", class: "btn btn-primary" if action_name == "edit" %>
   </div>
 <% end %>
