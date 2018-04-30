@@ -1,4 +1,28 @@
 <h1>Transactions</h1>
+<br>
+
+<div class="btn-group">
+  <div class="btn-group">
+    <button id="monthDropdownButton" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= @current_month %>
+    </button>
+    <div class="dropdown-menu" id="monthDropdown" aria-labelledby="monthDropdownButton">
+      <% @months.each do | month | %>
+        <%= link_to month, transactions_path(month: month, year: @current_year), class: "dropdown-item" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button id="yearDropdownButton" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= @current_year %>
+    </button>
+    <div class="dropdown-menu" id="yearDropdown" aria-labelledby="yearDropDownButton">
+      <% @years.each do | year | %>
+        <%= link_to year, transactions_path(month: @current_month, year: year), class: "dropdown-item" %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <table class="table table-sm table-hover">
   <thead>

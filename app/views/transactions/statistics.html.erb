@@ -1,34 +1,62 @@
 <h1>Statistics</h1>
-<i class="text-danger">Work in progress</i>
+<br>
+<div class="btn-group">
+  <div class="btn-group">
+    <button id="monthDropdownButton" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= @current_month %>
+    </button>
+    <div class="dropdown-menu" id="monthDropdown" aria-labelledby="monthDropdownButton">
+      <% @months.each do | month | %>
+        <%= link_to month, statistics_path(month: month, year: @current_year), class: "dropdown-item" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button id="yearDropdownButton" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= @current_year %>
+    </button>
+    <div class="dropdown-menu" id="yearDropdown" aria-labelledby="yearDropDownButton">
+      <% @years.each do | year | %>
+        <%= link_to year, statistics_path(month: @current_month, year: year), class: "dropdown-item" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<br>
 
 <table class="table table-sm table-hover">
   <thead>
-    <%# byebug %>
     <tr>
       <th>Category</th>
       <th>Total</th>
-      <% @categories.first[:users].each do |user| %>
-        <th><%= user[0] %></th>
+      <% if @categories.any? %>
+        <% @categories.first[:users].each do |user| %>
+          <th><%= user[0] %></th>
+        <% end %>
       <% end %>
       <th colspan="3"></th>
     </tr>
   </thead>
 
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr style="background-color:<%= category[:color] %>;">
-        <th scope="row"><%= category[:category] %></th>
-        <td>$<%= '%.2f' % category[:total] %></td>
-        <% category[:users].each do |user| %>
-          <td>$<%= '%.2f' % user[1] %></td>
+  <% if @categories.any? %>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr style="background-color:<%= category[:color] %>;">
+          <th scope="row"><%= category[:category] %></th>
+          <td>$<%= '%.2f' % category[:total] %></td>
+          <% category[:users].each do |user| %>
+            <td>$<%= '%.2f' % user[1] %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      <tr>
+        <th scope ="row">Total</th>
+        <% @totals.each do |total| %>
+          <td>$<%= total %></td>
         <% end %>
       </tr>
-    <% end %>
-    <tr>
-      <th scope ="row">Total</th>
-      <% @totals.each do |total| %>
-        <td>$<%= total %></td>
-      <% end %>
-    </tr>
-  </tbody>
+    </tbody>
+  <% end %>
 </table>
+<%= "No records found." unless @categories.any? %>

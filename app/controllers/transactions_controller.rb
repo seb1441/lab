@@ -5,7 +5,13 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.order(date: :desc)
+    @months = Date::MONTHNAMES.compact
+    @years = (2018..2030).to_a
+    @current_month = params[:month] || @months[Time.now.month - 1]
+    @current_year = params[:year] || Time.now.year
+    # @transactions = Transaction.order(date: :desc)
+    @transactions = Transaction.where('extract(month from date) = ?', @months.index(@current_month) + 1)
+      .where('extract(year from date) = ?', @current_year.to_i)
   end
 
   # GET /transactions/1
@@ -66,12 +72,18 @@ class TransactionsController < ApplicationController
   end
 
   def statistics
-    @page_title = "Statistics"
-    # transactions by params[:month]
-    transactions = Transaction.all
+    @months = Date::MONTHNAMES.compact
+    @years = (2018..2030).to_a
+    @current_month = params[:month] || @months[Time.now.month - 1]
+    @current_year = params[:year] || Time.now.year
+
+    transactions = Transaction.where('extract(month from date) = ?', @months.index(@current_month) + 1)
+      .where('extract(year from date) = ?', @current_year.to_i)
+    @categories = []
+
+    return unless transactions.any?
     users = User.all
 
-    @categories = []
 
     Category.order('title ASC').each do |category|
       obj = {
