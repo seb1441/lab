@@ -12,6 +12,7 @@ class TransactionsController < ApplicationController
     # @transactions = Transaction.order(date: :desc)
     @transactions = Transaction.where('extract(month from date) = ?', @months.index(@current_month) + 1)
       .where('extract(year from date) = ?', @current_year.to_i)
+      .order('date DESC')
   end
 
   # GET /transactions/1
