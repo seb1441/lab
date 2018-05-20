@@ -40,7 +40,7 @@
   <div class="form-group row">
     <%= form.label :category, class: "col-2 col-form-label" %>
     <div class="col-10">
-      <%= form.select :category_id, options_for_select(Category.order('title ASC').map{|c|[c.title, c.id]}), class: "form-control" %>
+      <%= form.select :category_id, options_for_select(Category.order('title ASC').map{|c|[c.title, c.id]}, @transaction.category_id), class: "form-control" %>
     </div>
     <%# <%= form.text_field :category, id: :transaction_category %1> %>
   </div>
