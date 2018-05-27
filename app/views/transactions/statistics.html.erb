@@ -1,6 +1,6 @@
-<h1>Statistics</h1>
+<h1>Total</h1>
 <br>
-<%= column_chart @chart, colors: ["#343a40"], prefix: "$" %>
+<%= column_chart @chart_total, colors: ["#343a40"], prefix: "$" %>
 <br>
 <div class="btn-group">
   <div class="btn-group">
@@ -24,6 +24,10 @@
     </div>
   </div>
 </div>
+<br>
+<br>
+
+<%= pie_chart @chart_categories, colors: @chart_categories.map { |c| Category.find_by(title: c[0]).color }, prefix: "$" %>
 
 <br>
 
