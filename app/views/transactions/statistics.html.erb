@@ -1,5 +1,7 @@
 <h1>Statistics</h1>
 <br>
+<%= column_chart Transaction.group_by_month(:date, format: "%b %Y").sum(:price), colors: ["#343a40"], prefix: "$" %>
+<br>
 <div class="btn-group">
   <div class="btn-group">
     <button id="monthDropdownButton" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -60,3 +62,4 @@
   <% end %>
 </table>
 <%= "No records found." unless @categories.any? %>
+<%#= pie_chart Transaction.group(:category).count %>
