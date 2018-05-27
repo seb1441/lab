@@ -78,6 +78,8 @@ class TransactionsController < ApplicationController
     @current_month = params[:month] || @months[Time.now.month - 1]
     @current_year = params[:year] || Time.now.year
 
+    @chart = Transaction.all.group_by {|t| t.date.beginning_of_month }.map { |m| [m.first.strftime("%B %Y"), m.second.sum(&:price).to_f] }
+
     transactions = Transaction.where('extract(month from date) = ?', @months.index(@current_month) + 1)
       .where('extract(year from date) = ?', @current_year.to_i)
     @categories = []

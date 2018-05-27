@@ -1,6 +1,6 @@
 <h1>Statistics</h1>
 <br>
-<%= column_chart Transaction.group_by_month(:date, format: "%b %Y").sum(:price), colors: ["#343a40"], prefix: "$" %>
+<%= column_chart @chart, colors: ["#343a40"], prefix: "$" %>
 <br>
 <div class="btn-group">
   <div class="btn-group">
