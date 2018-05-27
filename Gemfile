@@ -57,5 +57,4 @@ gem 'devise'
 gem 'simple_enum'
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
-gem 'groupdate'
 gem "chartkick"
