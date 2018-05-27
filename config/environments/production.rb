@@ -91,5 +91,5 @@ Rails.application.configure do
 
   # Added config
   config.time_zone = 'Eastern Time (US & Canada)'
-  # config.active_record.default_timezone = :local
+  config.active_record.default_timezone = :local
 end
