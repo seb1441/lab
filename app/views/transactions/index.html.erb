@@ -44,7 +44,7 @@
         <td><%= transaction.date %></td>
         <td><%= transaction.user.username %></td>
         <td><%= transaction.description %></td>
-        <td>$<%= transaction.price %></td>
+        <td><%= number_to_currency(transaction.price, unit: "$") %></td>
         <td style="<%= transaction.category.text_style %>"><%= transaction.category.title %></td>
         <td><%= link_to 'Delete', transaction, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm", style: "float:right;" %> <%= link_to 'Edit', edit_transaction_path(transaction), class: "btn btn-dark btn-sm", style: "float:right;" %></td>
       </tr>
